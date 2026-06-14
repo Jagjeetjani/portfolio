@@ -1362,3 +1362,90 @@ body:not(.loading) .hero-tagline {
 .nav-link:not(:hover)::after {
   transform-origin: right;
 }
+
+/* True 3D Card Hover Effects */
+[data-tilt] {
+  transform-style: preserve-3d;
+}
+
+.bento-card, .skill-card, .education-card {
+  transform-style: preserve-3d;
+}
+
+/* Bento Cards 3D Elements */
+.bento-card .project-image-wrapper,
+.bento-card .project-number,
+.bento-card .project-title,
+.bento-card .project-description,
+.bento-card .project-tags,
+.bento-card .project-actions,
+.bento-card .project-badge {
+  transition: transform 0.5s var(--ease-out-expo);
+  transform: translateZ(0);
+}
+
+.bento-card:hover .project-image-wrapper {
+  transform: translateZ(30px);
+}
+.bento-card:hover .project-title {
+  transform: translateZ(45px);
+}
+.bento-card:hover .project-number {
+  transform: translateZ(60px);
+}
+.bento-card:hover .project-description {
+  transform: translateZ(25px);
+}
+.bento-card:hover .project-tags {
+  transform: translateZ(35px);
+}
+.bento-card:hover .project-actions {
+  transform: translateZ(50px);
+}
+.bento-card:hover .project-badge {
+  transform: translateZ(55px);
+}
+
+/* Skill Cards 3D Elements */
+.skill-card .skill-card-icon,
+.skill-card .skill-card-name,
+.skill-card .skill-card-level {
+  transition: transform 0.5s var(--ease-out-expo);
+  transform: translateZ(0);
+}
+
+.skill-card:hover .skill-card-icon {
+  transform: translateZ(40px);
+}
+.skill-card:hover .skill-card-name {
+  transform: translateZ(25px);
+}
+.skill-card:hover .skill-card-level {
+  transform: translateZ(45px);
+}
+
+/* Education Cards 3D Elements */
+.education-card .education-icon,
+.education-card .education-degree,
+.education-card .education-branch,
+.education-card .education-university,
+.education-card .education-meta {
+  transition: transform 0.5s var(--ease-out-expo);
+  transform: translateZ(0);
+}
+
+.education-card:hover .education-icon {
+  transform: translateZ(50px);
+}
+.education-card:hover .education-degree {
+  transform: translateZ(30px);
+}
+.education-card:hover .education-branch {
+  transform: translateZ(25px);
+}
+.education-card:hover .education-university {
+  transform: translateZ(35px);
+}
+.education-card:hover .education-meta {
+  transform: translateZ(45px);
+}

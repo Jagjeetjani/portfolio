@@ -175,13 +175,14 @@
     if (!form || !submitBtn) return;
 
     form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
       var name    = document.getElementById('contactName');
       var email   = document.getElementById('contactEmail');
       var message = document.getElementById('contactMessage');
 
       // Basic client‑side validation
       if (!name.value.trim() || !email.value.trim() || !message.value.trim()) {
-        e.preventDefault();
         highlightInvalid(name);
         highlightInvalid(email);
         highlightInvalid(message);
@@ -189,17 +190,73 @@
       }
 
       if (!isValidEmail(email.value.trim())) {
-        e.preventDefault();
         highlightInvalid(email);
         return;
       }
 
-      // Add loading state (FormSubmit handles the actual POST)
+      var userName = name.value.trim();
+
+      // Add loading state
       submitBtn.classList.add('loading');
       submitBtn.disabled = true;
       var btnText = submitBtn.querySelector('.btn-text');
       if (btnText) btnText.textContent = 'Sending…';
+
+      var payload = {
+        name: name.value.trim(),
+        email: email.value.trim(),
+        message: message.value.trim()
+      };
+
+      fetch("https://formsubmit.co/ajax/jagjeetsinghjani3@gmail.com", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify(payload)
+      })
+      .then(function (response) {
+        if (response.ok) {
+          showFormSuccess(userName);
+        } else {
+          showFormError();
+        }
+      })
+      .catch(function () {
+        showFormError();
+      });
     });
+
+    function showFormSuccess(userName) {
+      form.innerHTML = [
+        '<div class="form-success-card" style="text-align: center; padding: 2rem 1rem; animation: scaleIn 0.5s var(--ease-out-expo) both;">',
+        '  <div class="success-icon" style="font-size: 3.5rem; margin-bottom: 1.5rem; filter: drop-shadow(0 0 15px rgba(132, 204, 22, 0.4));">✅</div>',
+        '  <h3 class="success-title" style="margin-bottom: 0.75rem; background: var(--gradient-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-size: 1.75rem; font-family: var(--font-heading); font-weight: 800;">Message Sent!</h3>',
+        '  <p class="success-text" style="color: var(--text-secondary); line-height: 1.6; font-size: 1.05rem;">Thanks for reaching out, ' + userName + '!<br>I have received your message and will respond to you shortly.</p>',
+        '</div>'
+      ].join('\n');
+    }
+
+    function showFormError() {
+      submitBtn.classList.remove('loading');
+      submitBtn.disabled = false;
+      var btnText = submitBtn.querySelector('.btn-text');
+      if (btnText) btnText.textContent = 'Send Message';
+
+      var errEl = form.querySelector('.form-error-msg');
+      if (!errEl) {
+        errEl = document.createElement('div');
+        errEl.className = 'form-error-msg';
+        errEl.style.cssText = 'color: var(--accent-magenta); text-align: center; margin-top: 1rem; font-size: 0.9rem; font-weight: 500; animation: fadeInUp 0.4s ease;';
+        form.appendChild(errEl);
+      }
+      errEl.textContent = '⚠️ Failed to send message. Please try again or email me directly.';
+
+      setTimeout(function () {
+        if (errEl) errEl.remove();
+      }, 6000);
+    }
 
     function highlightInvalid(input) {
       if (!input.value.trim() || (input.type === 'email' && !isValidEmail(input.value))) {
@@ -223,23 +280,24 @@
     var cards = document.querySelectorAll('[data-tilt]');
     if (!cards.length) return;
 
-    var MAX_TILT = 10; // degrees
-
     cards.forEach(function (card) {
       card.addEventListener('mousemove', function (e) {
         var rect = card.getBoundingClientRect();
         var x    = e.clientX - rect.left;
         var y    = e.clientY - rect.top;
 
-        var rotateY = ((x / rect.width)  - 0.5) *  MAX_TILT * 2;
-        var rotateX = ((y / rect.height) - 0.5) * -MAX_TILT * 2;
+        // Dynamic scale down for larger cards to keep physical edge displacement consistent
+        var maxTilt = Math.min(5, 2000 / Math.max(rect.width, rect.height));
 
-        card.style.transform  = 'perspective(800px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg)';
+        var rotateY = ((x / rect.width)  - 0.5) *  maxTilt * 2;
+        var rotateX = ((y / rect.height) - 0.5) * -maxTilt * 2;
+
+        card.style.transform  = 'perspective(1200px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg)';
         card.style.transition = 'transform 0.1s ease';
       });
 
       card.addEventListener('mouseleave', function () {
-        card.style.transform  = 'perspective(800px) rotateX(0deg) rotateY(0deg)';
+        card.style.transform  = 'perspective(1200px) rotateX(0deg) rotateY(0deg)';
         card.style.transition = 'transform 0.5s ease';
       });
     });

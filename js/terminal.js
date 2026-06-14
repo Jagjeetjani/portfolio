@@ -14,11 +14,16 @@
       this.output  = document.getElementById('terminalOutput');
       this.closeBtn = document.getElementById('terminalClose');
       this.body    = document.getElementById('terminalBody');
+      this.promptEl = this.overlay ? this.overlay.querySelector('.terminal-prompt') : null;
 
       // State
       this.history      = [];
       this.historyIndex = -1;
       this.isOpen       = false;
+
+      // Game engine states
+      this.activeGame   = null; // 'tictactoe', 'guess', or null
+      this.gameState    = null; // stores game board or targets
 
       // Bind methods so we can add / remove listeners cleanly
       this._onKeyDown  = this._handleGlobalKeyDown.bind(this);
@@ -134,8 +139,9 @@
     _executeCommand(raw) {
       const trimmed = raw.trim();
 
-      // Echo the command with prompt
-      this.printLine(`jagjeet@portfolio:~$ ${trimmed}`, 'command');
+      // Echo the command with the dynamic prompt
+      const currentPrompt = this.promptEl ? this.promptEl.textContent : 'jagjeet@portfolio:~$';
+      this.printLine(`${currentPrompt} ${trimmed}`, 'command');
 
       if (trimmed) {
         // Add to history
@@ -153,7 +159,16 @@
     }
 
     _parseAndRun(cmd) {
-      const lower = cmd.toLowerCase();
+      const trimmed = cmd.trim();
+      const lower = trimmed.toLowerCase();
+
+      // Intercept inputs if a game sub-shell is running
+      if (this.activeGame === 'tictactoe') {
+        return this._handleTicTacToe(lower);
+      }
+      if (this.activeGame === 'guess') {
+        return this._handleGuess(lower);
+      }
 
       // Special multi-word commands
       if (lower === 'sudo hire me') return this.commands['sudo hire me']();
@@ -188,6 +203,169 @@
       }
     }
 
+    // ── Tic-Tac-Toe Game Logic ──
+
+    _handleTicTacToe(input) {
+      if (input === 'exit' || input === 'quit') {
+        this.activeGame = null;
+        this.gameState = null;
+        if (this.promptEl) this.promptEl.textContent = 'jagjeet@portfolio:~$';
+        return 'Exited Tic-Tac-Toe. Welcome back to the main shell!';
+      }
+
+      const board = this.gameState.board;
+      const move = parseInt(input, 10);
+
+      if (isNaN(move) || move < 0 || move > 8) {
+        return 'Invalid move. Enter a cell position (0-8) to place X, or type "exit" to quit.';
+      }
+
+      if (board[move] !== ' ') {
+        return 'That cell is already occupied! Try another cell:\n\n' + this._renderTicTacToeBoard();
+      }
+
+      // 1. Player X Turn
+      board[move] = 'X';
+
+      // Check win
+      if (this._checkTicTacToeWin('X')) {
+        const boardStr = this._renderTicTacToeBoard();
+        this.activeGame = null;
+        this.gameState = null;
+        if (this.promptEl) this.promptEl.textContent = 'jagjeet@portfolio:~$';
+        return boardStr + '\n\n🎉 <strong>Congratulations! You beat the CPU!</strong> Game Over.';
+      }
+
+      // Check draw
+      if (board.every(cell => cell !== ' ')) {
+        const boardStr = this._renderTicTacToeBoard();
+        this.activeGame = null;
+        this.gameState = null;
+        if (this.promptEl) this.promptEl.textContent = 'jagjeet@portfolio:~$';
+        return boardStr + '\n\n🤝 <strong>It\'s a draw!</strong> Game Over.';
+      }
+
+      // 2. CPU O Turn
+      const cpuMove = this._getCPUTicTacToeMove(board);
+      board[cpuMove] = 'O';
+
+      // Check win
+      if (this._checkTicTacToeWin('O')) {
+        const boardStr = this._renderTicTacToeBoard();
+        this.activeGame = null;
+        this.gameState = null;
+        if (this.promptEl) this.promptEl.textContent = 'jagjeet@portfolio:~$';
+        return boardStr + '\n\n💀 <strong>Oh no! The CPU beat you.</strong> Better luck next time!';
+      }
+
+      // Check draw
+      if (board.every(cell => cell !== ' ')) {
+        const boardStr = this._renderTicTacToeBoard();
+        this.activeGame = null;
+        this.gameState = null;
+        if (this.promptEl) this.promptEl.textContent = 'jagjeet@portfolio:~$';
+        return boardStr + '\n\n🤝 <strong>It\'s a draw!</strong> Game Over.';
+      }
+
+      return `You played position ${move}. CPU plays position ${cpuMove}.\n\n` + this._renderTicTacToeBoard() + '\n\nYour turn! Enter position (0-8):';
+    }
+
+    _renderTicTacToeBoard() {
+      const b = this.gameState.board;
+      return [
+        `  ${b[0]} | ${b[1]} | ${b[2]}        Reference Chart:`,
+        ` ---+---+---       0 | 1 | 2`,
+        `  ${b[3]} | ${b[4]} | ${b[5]}      ---+---+---`,
+        ` ---+---+---       3 | 4 | 5`,
+        `  ${b[6]} | ${b[7]} | ${b[8]}      ---+---+---`,
+        `                   6 | 7 | 8`
+      ].join('\n');
+    }
+
+    _getCPUTicTacToeMove(board) {
+      const winPatterns = [
+        [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
+        [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
+        [0, 4, 8], [2, 4, 6]             // diagonals
+      ];
+
+      // 1. Check if CPU can win in 1 move
+      for (let pattern of winPatterns) {
+        const [a, b, c] = pattern;
+        if (board[a] === 'O' && board[b] === 'O' && board[c] === ' ') return c;
+        if (board[a] === 'O' && board[c] === 'O' && board[b] === ' ') return b;
+        if (board[b] === 'O' && board[c] === 'O' && board[a] === ' ') return a;
+      }
+
+      // 2. Check if player needs to be blocked
+      for (let pattern of winPatterns) {
+        const [a, b, c] = pattern;
+        if (board[a] === 'X' && board[b] === 'X' && board[c] === ' ') return c;
+        if (board[a] === 'X' && board[c] === 'X' && board[b] === ' ') return b;
+        if (board[b] === 'X' && board[c] === 'X' && board[a] === ' ') return a;
+      }
+
+      // 3. Take center if open
+      if (board[4] === ' ') return 4;
+
+      // 4. Take random corner
+      const corners = [0, 2, 6, 8].filter(idx => board[idx] === ' ');
+      if (corners.length > 0) {
+        return corners[Math.floor(Math.random() * corners.length)];
+      }
+
+      // 5. Take random side
+      const sides = [1, 3, 5, 7].filter(idx => board[idx] === ' ');
+      if (sides.length > 0) {
+        return sides[Math.floor(Math.random() * sides.length)];
+      }
+
+      return 0;
+    }
+
+    _checkTicTacToeWin(player) {
+      const b = this.gameState.board;
+      const winPatterns = [
+        [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
+        [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
+        [0, 4, 8], [2, 4, 6]             // diagonals
+      ];
+      return winPatterns.some(pattern => {
+        return pattern.every(idx => b[idx] === player);
+      });
+    }
+
+    // ── Guessing Game Logic ──
+
+    _handleGuess(input) {
+      if (input === 'exit' || input === 'quit') {
+        this.activeGame = null;
+        this.gameState = null;
+        if (this.promptEl) this.promptEl.textContent = 'jagjeet@portfolio:~$';
+        return 'Exited Guessing Game. Welcome back to the main shell!';
+      }
+
+      const guessNum = parseInt(input, 10);
+      if (isNaN(guessNum) || guessNum < 1 || guessNum > 100) {
+        return 'Invalid guess. Enter a number between 1 and 100, or type "exit" to quit.';
+      }
+
+      this.gameState.attempts++;
+      const target = this.gameState.targetNumber;
+
+      if (guessNum === target) {
+        const attempts = this.gameState.attempts;
+        this.activeGame = null;
+        this.gameState = null;
+        if (this.promptEl) this.promptEl.textContent = 'jagjeet@portfolio:~$';
+        return `🎉 <strong>Correct!</strong> You guessed the secret number (${target}) in ${attempts} attempts! Game Over.`;
+      } else if (guessNum < target) {
+        return `Too low! Try again (Guess #${this.gameState.attempts + 1}):`;
+      } else {
+        return `Too high! Try again (Guess #${this.gameState.attempts + 1}):`;
+      }
+    }
+
     // ── Commands ──
 
     get commands() {
@@ -199,11 +377,15 @@
           '  skills        — View skill bars',
           '  projects      — List featured projects',
           '  contact       — Contact information',
+          '  socials       — Direct links to social profiles',
           '  education     — Academic background',
           '  neofetch      — System info (portfolio style)',
           '  whoami        — Who are you?',
           '  ls            — List portfolio sections',
           '  echo [text]   — Print text to terminal',
+          '  tictactoe     — Play Tic-Tac-Toe against CPU 🎮',
+          '  guess         — Play a number guessing game 🔢',
+          '  joke          — Get a random programmer joke 😆',
           '  matrix        — Enter the Matrix 🟩',
           '  clear         — Clear terminal output',
           '  exit          — Close terminal',
@@ -260,8 +442,15 @@
 
         contact: () => [
           'Email:    jagjeetsinghjani3@gmail.com',
-          'GitHub:   github.com/jagjeetsingh',
-          'LinkedIn: linkedin.com/in/jagjeetsingh',
+          'GitHub:   github.com/Jagjeetjani',
+          'LinkedIn: linkedin.com/in/jagjeet-singh-a316a0377/',
+        ].join('\n'),
+
+        socials: () => [
+          '🔗 <strong>My Social Links:</strong>',
+          '  GitHub:   github.com/Jagjeetjani',
+          '  LinkedIn: linkedin.com/in/jagjeet-singh-a316a0377/',
+          '  Instagram: instagram.com/jagjeet_jani',
         ].join('\n'),
 
         education: () => [
@@ -286,6 +475,55 @@
 
         'sudo hire me': () =>
           '🎉 Excellent taste! Let\'s talk → jagjeetsinghjani3@gmail.com',
+
+        joke: () => {
+          const jokes = [
+            "Why do programmers wear glasses? Because they can't C#!",
+            "There are 10 kinds of people in this world: Those who understand binary, and those who don't.",
+            "How many programmers does it take to change a light bulb? None, that's a hardware problem.",
+            "What is a programmer's favorite hangout place? Foo Bar!",
+            "['hip', 'hip'] (hip hip array!)",
+            "Why did the programmer quit his job? Because he didn't get arrays.",
+            "A SQL query goes into a bar, walks up to two tables and asks, 'Can I join you?'",
+            "What is an algorithm? A word used by programmers when they don't want to explain what they did."
+          ];
+          return jokes[Math.floor(Math.random() * jokes.length)];
+        },
+
+        tictactoe: () => {
+          this.activeGame = 'tictactoe';
+          this.gameState = {
+            board: [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+          };
+          if (this.promptEl) this.promptEl.textContent = 'ttt:~$';
+          return [
+            '🎮 <strong>Tic-Tac-Toe Game Started!</strong>',
+            'You are "X" (Player), CPU is "O".',
+            'Type position number (0-8) to place a move, or "exit" to quit.',
+            '',
+            this._renderTicTacToeBoard(),
+            '',
+            'Your turn! Enter position (0-8):'
+          ].join('\n');
+        },
+        ttt: () => this.commands.tictactoe(),
+
+        guess: () => {
+          const target = Math.floor(Math.random() * 100) + 1;
+          this.activeGame = 'guess';
+          this.gameState = {
+            targetNumber: target,
+            attempts: 0
+          };
+          if (this.promptEl) this.promptEl.textContent = 'guess:~$';
+          return [
+            '🔢 <strong>Number Guessing Game Started!</strong>',
+            'I\'m thinking of a number between 1 and 100.',
+            'Type your guess below, or type "exit" to quit.',
+            '',
+            'Enter your first guess:'
+          ].join('\n');
+        },
 
         neofetch: () => {
           const art = [
