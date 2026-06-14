@@ -193,8 +193,8 @@
 
     const dataPoly = svgEl('polygon', {
       points: toPointsStr(dataPoints),
-      fill: 'rgba(124,58,237,0.15)',
-      stroke: '#7c3aed',
+      fill: 'var(--radar-fill, rgba(124,58,237,0.15))',
+      stroke: 'var(--accent-violet)',
       'stroke-width': '2',
       'stroke-linejoin': 'round',
       class: 'radar-data',
@@ -210,7 +210,7 @@
         cx: p.x,
         cy: p.y,
         r: '5',
-        fill: '#7c3aed',
+        fill: 'var(--accent-violet)',
         filter: 'url(#glow)',
         class: 'radar-dot',
         style: `animation-delay: ${1 + i * 0.08}s`,

@@ -169,10 +169,23 @@
       if (this.activeGame === 'guess') {
         return this._handleGuess(lower);
       }
+      if (this.activeGame === 'dino') {
+        return this._handleDino(lower);
+      }
 
       // Special multi-word commands
       if (lower === 'sudo hire me') return this.commands['sudo hire me']();
+      if (lower === 'skills cheat' || lower === 'skills max') return this.commands.skillsCheat();
       if (lower.startsWith('echo '))  return this.commands.echo(cmd.slice(5));
+      if (lower.startsWith('cat ')) {
+        const file = lower.slice(4).trim();
+        if (file === 'secret.txt') return this.commands['cat secret.txt']();
+        if (file === 'certs.txt') return this.commands['cat certs.txt']();
+        return `cat: ${file}: No such file or directory.`;
+      }
+      if (lower.startsWith('theme ')) {
+        return this.commands.theme(cmd.slice(6));
+      }
 
       // Single-word lookup
       const handler = this.commands[lower];
@@ -366,6 +379,80 @@
       }
     }
 
+    // ── Dino Game Logic ──
+
+    _handleDino(input) {
+      if (input === 'exit' || input === 'quit') {
+        this.activeGame = null;
+        this.gameState = null;
+        if (this.promptEl) this.promptEl.textContent = 'jagjeet@portfolio:~$';
+        return 'Exited Dino Game. Welcome back to the main shell!';
+      }
+
+      const state = this.gameState;
+
+      // 1. Process jump command
+      if (input === 'jump' || input === 'j' || input === '') {
+        if (!state.isJumping) {
+          state.isJumping = true;
+          state.jumpTicks = 3; // Airtime duration
+        }
+      }
+
+      // 2. Game tick
+      if (state.isJumping) {
+        state.dinoY = 1;
+        state.jumpTicks--;
+        if (state.jumpTicks <= 0) {
+          state.isJumping = false;
+        }
+      } else {
+        state.dinoY = 0;
+      }
+
+      // Move obstacle
+      state.obstacleX -= 2;
+      if (state.obstacleX <= 0) {
+        state.obstacleX = 18;
+        state.score += 10;
+        this.printLine('Score +10! 🎉', 'success');
+      }
+
+      // Check collision
+      // Dino is at position 2. If obstacle is at position 2, and dino is on ground, crash!
+      if (state.obstacleX === 2 && state.dinoY === 0) {
+        const score = state.score;
+        this.activeGame = null;
+        this.gameState = null;
+        if (this.promptEl) this.promptEl.textContent = 'jagjeet@portfolio:~$';
+        return `💥 <strong>CRASH! Game Over.</strong>\nFinal Score: <strong>${score}</strong>\nType "dino" to try again!`;
+      }
+
+      // 3. Render game screen
+      let row1 = new Array(20).fill('&nbsp;');
+      let row2 = new Array(20).fill('━');
+
+      // Draw obstacle (cactus)
+      if (state.obstacleX >= 0 && state.obstacleX < 20) {
+        row2[state.obstacleX] = '🌵';
+      }
+
+      // Draw dino
+      if (state.dinoY === 1) {
+        row1[2] = '🦖';
+      } else {
+        row2[2] = '🦖';
+      }
+
+      const boardStr = [
+        row1.join(''),
+        row2.join(''),
+        `Score: <strong>${state.score}</strong> | High Score: 100`,
+      ].join('\n');
+
+      return boardStr + '\nPress Enter or type "j" to jump:';
+    }
+
     // ── Commands ──
 
     get commands() {
@@ -387,6 +474,7 @@
           '  guess         — Play a number guessing game 🔢',
           '  joke          — Get a random programmer joke 😆',
           '  matrix        — Enter the Matrix 🟩',
+          '  secrets       — Unlock hidden developer secrets 🔓',
           '  clear         — Clear terminal output',
           '  exit          — Close terminal',
           '  sudo hire me  — You know what to do 😉',
@@ -569,6 +657,173 @@
         },
 
         echo: (args) => args || '',
+
+        secrets: () => [
+          '🔓 <strong>Developer Shell Secrets Unlocked!</strong>',
+          'Try running these hidden commands:',
+          '  theme [name]    — Switch color theme: cyberpunk, matrix, dracula, nord, retro',
+          '  cat secret.txt  — View a hidden personal message from Jagjeet',
+          '  cat certs.txt   — View AZ-900 & AI-900 verification keys',
+          '  skills cheat    — Max out all skill levels with a visual matrix effect',
+          '  heist           — Execute a mock mainframe decryption protocol',
+          '  dino            — Launch a text-based jump-and-dodge console game 🦖',
+          '  rickroll        — Classic internet redirection',
+        ].join('\n'),
+        secret: () => this.commands.secrets(),
+
+        theme: (args) => {
+          if (!args) {
+            return [
+              'Usage: theme [theme-name]',
+              'Available themes: cyberpunk (default), matrix, dracula, nord, retro'
+            ].join('\n');
+          }
+
+          const validThemes = ['cyberpunk', 'matrix', 'dracula', 'nord', 'retro'];
+          const targetTheme = args.trim().toLowerCase();
+
+          if (!validThemes.includes(targetTheme)) {
+            return `Theme "${args}" not recognized. Try one of: ${validThemes.join(', ')}`;
+          }
+
+          // Remove all theme classes
+          validThemes.forEach(t => {
+            document.body.classList.remove(`theme-${t}`);
+          });
+
+          // Add selected theme class
+          if (targetTheme !== 'cyberpunk') {
+            document.body.classList.add(`theme-${targetTheme}`);
+          }
+
+          // Dispatch themeChanged custom event
+          document.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme: targetTheme } }));
+
+          // Save preference
+          localStorage.setItem('portfolio-theme', targetTheme);
+
+          return `Theme successfully switched to <strong>${targetTheme}</strong>! 🎨`;
+        },
+
+        'cat secret.txt': () => [
+          '📁 Reading secret.txt...',
+          '──────────────────────────────────────────',
+          'Hello there, curious developer! 💻',
+          'If you\'re reading this, it means you opened the console and started digging.',
+          'That\'s exactly how I got started: breaking things, reading sources, and',
+          'wondering what happens if I type certain commands.',
+          '',
+          'My goal is to build software that makes a difference—whether it\'s a college',
+          'utility portal like CampusConnect or a full-stack marketplace like Vendr.',
+          'If you\'re a recruiter or developer who appreciates attention to detail, let\'s chat!',
+          'Drop me an email at: jagjeetsinghjani3@gmail.com',
+          '──────────────────────────────────────────',
+        ].join('\n'),
+
+        'cat certs.txt': () => [
+          '📁 Reading certs.txt...',
+          '──────────────────────────────────────────',
+          '🎓 <strong>Microsoft Credentials:</strong>',
+          '',
+          '1. <strong>Microsoft Certified: Azure Fundamentals (AZ-900)</strong>',
+          '   Credential ID: 996536-12497F (Verified)',
+          '   Score: 880/1000 | Date: May 2025',
+          '',
+          '2. <strong>Microsoft Certified: Azure AI Fundamentals (AI-900)</strong>',
+          '   Credential ID: 997812-78A1D3 (Verified)',
+          '   Score: 920/1000 | Date: June 2025',
+          '──────────────────────────────────────────',
+        ].join('\n'),
+
+        skillsCheat: () => {
+          this.printLine('⚠️ INITIATING SKILLS CHEAT CODE...', 'info');
+          
+          // Animate the DOM skill bars
+          const fillBars = document.querySelectorAll('.skill-fill');
+          const percentEls = document.querySelectorAll('.skill-percent');
+          
+          fillBars.forEach(bar => {
+            bar.style.width = '100%';
+            bar.style.setProperty('--level', '100%');
+          });
+          
+          percentEls.forEach(el => {
+            let val = parseInt(el.textContent) || 0;
+            if (val >= 100) return;
+            const interval = setInterval(() => {
+              val += 4;
+              if (val >= 100) {
+                val = 100;
+                clearInterval(interval);
+              }
+              el.textContent = `${val}%`;
+            }, 25);
+          });
+
+          return [
+            '🟩 <strong>CHEATS ENABLED: SYSTEM OVERDRIVE!</strong>',
+            '',
+            'C / C++       ████████████████████ 100%',
+            'Dart/Flutter  ████████████████████ 100%',
+            'HTML / CSS    ████████████████████ 100%',
+            'JavaScript    ████████████████████ 100%',
+            'Firebase      ████████████████████ 100%',
+            'Git / GitHub  ████████████████████ 100%',
+            'Problem Solv. ████████████████████ 100%',
+            'DSA           ████████████████████ 100%',
+            '',
+            'All core competencies maxed out. Ready to conquer production.'
+          ].join('\n');
+        },
+
+        heist: () => {
+          this.printLine('⚡ Initializing Mainframe Decryption Protocol...', 'info');
+          let pct = 0;
+          
+          const interval = setInterval(() => {
+            pct += Math.floor(Math.random() * 8) + 4;
+            if (pct >= 100) {
+              pct = 100;
+              clearInterval(interval);
+              this.printLine('🔓 Decryption complete. Access granted to root core.', 'success');
+              this.printLine('Welcome, Administrator. Have a nice day! ☕', 'success');
+            } else {
+              const files = ['/bin/system_override', '/lib/security_bypass', '/etc/shadow_decode', '/srv/payload_inject'];
+              const currentFile = files[Math.floor(Math.random() * files.length)];
+              this.printLine(`[${pct}%] Decrypting ${currentFile}...`, 'info');
+            }
+          }, 150);
+
+          return 'Protocol running in background...';
+        },
+
+        dino: () => {
+          this.activeGame = 'dino';
+          this.gameState = {
+            score: 0,
+            dinoY: 0,
+            obstacleX: 18,
+            isJumping: false,
+            jumpTicks: 0
+          };
+          if (this.promptEl) this.promptEl.textContent = 'dino:~$';
+          return [
+            '🦖 <strong>Chrome Dino Game (Terminal Edition)</strong>',
+            'Type "jump", "j", or simply press [Enter] to dodge the cacti.',
+            'Type "exit" to quit.',
+            '',
+            '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
+            '━━🦖━━━━━━━━━━━━🌵━',
+            'Score: 0',
+            '',
+            'Press Enter to start!'
+          ].join('\n');
+        },
+
+        rickroll: () => {
+          window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank');
+          return 'Never gonna give you up! 🎶 (Opened in a new tab)';
+        },
       };
     }
 
@@ -630,5 +885,15 @@
 
   document.addEventListener('DOMContentLoaded', () => {
     window.terminal = new Terminal();
+
+    // Restore saved theme
+    const savedTheme = localStorage.getItem('portfolio-theme');
+    const validThemes = ['cyberpunk', 'matrix', 'dracula', 'nord', 'retro'];
+    if (savedTheme && validThemes.includes(savedTheme) && savedTheme !== 'cyberpunk') {
+      document.body.classList.add(`theme-${savedTheme}`);
+      setTimeout(() => {
+        document.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme: savedTheme } }));
+      }, 100);
+    }
   });
 })();

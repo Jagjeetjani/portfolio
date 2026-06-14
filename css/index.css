@@ -508,3 +508,99 @@ p {
   color: var(--accent-violet);
   box-shadow: var(--glow-violet);
 }
+
+/* ============================================ */
+/* THEMES (Developer Shell Secrets)             */
+/* ============================================ */
+
+/* Matrix (Hacker Green) Theme */
+body.theme-matrix {
+  --bg-deep:          #020402;
+  --bg-surface:       #070c08;
+  --bg-surface-hover: #0e1810;
+  --accent-violet:    #00ff33;
+  --accent-magenta:   #00dd22;
+  --accent-cyan:      #39ff14;
+  --accent-yellow:    #00ff00;
+  --accent-lime:      #00cc00;
+  --gradient-hero:    linear-gradient(135deg, #00ff33, #008000, #00ff66);
+  --gradient-about:   linear-gradient(135deg, #00ff33 0%, #004d00 100%);
+  --gradient-skills:  linear-gradient(135deg, #39ff14 0%, #00ff33 100%);
+  --gradient-projects:linear-gradient(135deg, #00dd22 0%, #00ff33 100%);
+  --gradient-timeline:linear-gradient(135deg, #00ff00 0%, #006600 100%);
+  --gradient-contact: linear-gradient(135deg, #00ff33, #00dd22, #39ff14, #00ff00);
+  --gradient-text:    linear-gradient(90deg, #00ff33, #00dd22, #39ff14);
+  --glow-violet:      0 0 30px rgba(0, 255, 51, 0.4);
+  --glow-magenta:     0 0 30px rgba(0, 221, 34, 0.4);
+  --glow-cyan:        0 0 30px rgba(57, 255, 20, 0.4);
+  --radar-fill:       rgba(0, 255, 51, 0.15);
+}
+
+/* Dracula Theme */
+body.theme-dracula {
+  --bg-deep:          #1e1f29;
+  --bg-surface:       #282a36;
+  --bg-surface-hover: #343746;
+  --accent-violet:    #bd93f9;
+  --accent-magenta:   #ff79c6;
+  --accent-cyan:      #8be9fd;
+  --accent-yellow:    #f1fa8c;
+  --accent-lime:      #50fa7b;
+  --gradient-hero:    linear-gradient(135deg, #bd93f9, #ff79c6, #8be9fd);
+  --gradient-about:   linear-gradient(135deg, #bd93f9 0%, #6272a4 100%);
+  --gradient-skills:  linear-gradient(135deg, #8be9fd 0%, #bd93f9 100%);
+  --gradient-projects:linear-gradient(135deg, #ff79c6 0%, #bd93f9 100%);
+  --gradient-timeline:linear-gradient(135deg, #f1fa8c 0%, #ffb86c 100%);
+  --gradient-contact: linear-gradient(135deg, #bd93f9, #ff79c6, #8be9fd, #f1fa8c);
+  --gradient-text:    linear-gradient(90deg, #bd93f9, #ff79c6, #8be9fd);
+  --glow-violet:      0 0 30px rgba(189, 147, 249, 0.35);
+  --glow-magenta:     0 0 30px rgba(255, 121, 198, 0.35);
+  --glow-cyan:        0 0 30px rgba(139, 233, 253, 0.35);
+  --radar-fill:       rgba(189, 147, 249, 0.15);
+}
+
+/* Nord Theme */
+body.theme-nord {
+  --bg-deep:          #2e3440;
+  --bg-surface:       #3b4252;
+  --bg-surface-hover: #434c5e;
+  --accent-violet:    #b48ead;
+  --accent-magenta:   #bf616a;
+  --accent-cyan:      #88c0d0;
+  --accent-yellow:    #ebcb8b;
+  --accent-lime:      #a3be8c;
+  --gradient-hero:    linear-gradient(135deg, #88c0d0, #81a1c1, #b48ead);
+  --gradient-about:   linear-gradient(135deg, #81a1c1 0%, #4c566a 100%);
+  --gradient-skills:  linear-gradient(135deg, #88c0d0 0%, #81a1c1 100%);
+  --gradient-projects:linear-gradient(135deg, #bf616a 0%, #b48ead 100%);
+  --gradient-timeline:linear-gradient(135deg, #ebcb8b 0%, #d08770 100%);
+  --gradient-contact: linear-gradient(135deg, #88c0d0, #81a1c1, #b48ead, #ebcb8b);
+  --gradient-text:    linear-gradient(90deg, #88c0d0, #81a1c1, #b48ead);
+  --glow-violet:      0 0 30px rgba(180, 142, 173, 0.35);
+  --glow-magenta:     0 0 30px rgba(191, 97, 106, 0.35);
+  --glow-cyan:        0 0 30px rgba(136, 192, 208, 0.35);
+  --radar-fill:       rgba(180, 142, 173, 0.15);
+}
+
+/* Retro (Amber) Theme */
+body.theme-retro {
+  --bg-deep:          #0c0700;
+  --bg-surface:       #1a1000;
+  --bg-surface-hover: #261800;
+  --accent-violet:    #ffb000;
+  --accent-magenta:   #ff8000;
+  --accent-cyan:      #ffd000;
+  --accent-yellow:    #ffb000;
+  --accent-lime:      #ff8000;
+  --gradient-hero:    linear-gradient(135deg, #ffb000, #ff8000, #ffd000);
+  --gradient-about:   linear-gradient(135deg, #ffb000 0%, #805000 100%);
+  --gradient-skills:  linear-gradient(135deg, #ffd000 0%, #ffb000 100%);
+  --gradient-projects:linear-gradient(135deg, #ff8000 0%, #ffb000 100%);
+  --gradient-timeline:linear-gradient(135deg, #ffb000 0%, #b35900 100%);
+  --gradient-contact: linear-gradient(135deg, #ffb000, #ff8000, #ffd000, #ffb000);
+  --gradient-text:    linear-gradient(90deg, #ffb000, #ff8000, #ffd000);
+  --glow-violet:      0 0 30px rgba(255, 176, 0, 0.45);
+  --glow-magenta:     0 0 30px rgba(255, 128, 0, 0.45);
+  --glow-cyan:        0 0 30px rgba(255, 208, 0, 0.45);
+  --radar-fill:       rgba(255, 176, 0, 0.15);
+}

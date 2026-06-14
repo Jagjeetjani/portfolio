@@ -7,7 +7,7 @@
   'use strict';
 
   // ── Configuration ──────────────────────────
-  var COLORS          = ['#7c3aed', '#ec4899', '#06b6d4', '#facc15'];
+  var colors          = ['#7c3aed', '#ec4899', '#06b6d4', '#facc15'];
   var CONNECT_DIST    = 150;
   var REPULSE_DIST    = 120;
   var DESKTOP_COUNT   = 120;
@@ -23,8 +23,32 @@
     return Math.random() * (max - min) + min;
   }
 
-  function pick(arr) {
-    return arr[Math.floor(Math.random() * arr.length)];
+  function updateColors() {
+    var style = getComputedStyle(document.body);
+    var v = style.getPropertyValue('--accent-violet').trim();
+    var m = style.getPropertyValue('--accent-magenta').trim();
+    var c = style.getPropertyValue('--accent-cyan').trim();
+    var y = style.getPropertyValue('--accent-yellow').trim();
+    if (v && m && c && y) {
+      colors = [v, m, c, y];
+    }
+  }
+
+  function pickColor() {
+    return colors[Math.floor(Math.random() * colors.length)];
+  }
+
+  function hexToRgb(hex) {
+    var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+    hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+      return r + r + g + g + b + b;
+    });
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16)
+    } : { r: 124, g: 58, b: 237 };
   }
 
   // ── Particle ───────────────────────────────
@@ -34,7 +58,7 @@
     this.vx      = rand(-MAX_SPEED, MAX_SPEED);
     this.vy      = rand(-MAX_SPEED, MAX_SPEED);
     this.radius  = rand(MIN_RADIUS, MAX_RADIUS);
-    this.color   = pick(COLORS);
+    this.color   = pickColor();
     this.opacity = rand(MIN_OPACITY, MAX_OPACITY);
   }
 
@@ -130,6 +154,8 @@
   ParticleSystem.prototype.drawConnections = function () {
     var pts = this.particles;
     var ctx = this.ctx;
+    var rgb = hexToRgb(colors[0]); // colors[0] is --accent-violet
+    var strokePrefix = 'rgba(' + rgb.r + ', ' + rgb.g + ', ' + rgb.b + ', ';
     for (var i = 0, len = pts.length; i < len; i++) {
       for (var j = i + 1; j < len; j++) {
         var dx   = pts[i].x - pts[j].x;
@@ -140,7 +166,7 @@
           ctx.beginPath();
           ctx.moveTo(pts[i].x, pts[i].y);
           ctx.lineTo(pts[j].x, pts[j].y);
-          ctx.strokeStyle = 'rgba(124, 58, 237, ' + (alpha * 0.15) + ')';
+          ctx.strokeStyle = strokePrefix + (alpha * 0.15) + ')';
           ctx.lineWidth   = 0.5;
           ctx.stroke();
         }
@@ -170,6 +196,16 @@
 
   // ── Bootstrap ──────────────────────────────
   document.addEventListener('preloaderDone', function () {
+    updateColors();
     window.particleSystem = new ParticleSystem();
+  });
+
+  document.addEventListener('themeChanged', function () {
+    updateColors();
+    if (window.particleSystem && window.particleSystem.particles) {
+      window.particleSystem.particles.forEach(function (p) {
+        p.color = pickColor();
+      });
+    }
   });
 })();
