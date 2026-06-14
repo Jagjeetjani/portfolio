@@ -18,6 +18,12 @@
     var preloaderFill   = document.getElementById('preloaderFill');
     var preloaderPercent = document.getElementById('preloaderPercent');
 
+    function finish() {
+      document.body.classList.remove('loading');
+      document.dispatchEvent(new CustomEvent('preloaderDone'));
+      document.dispatchEvent(new CustomEvent('preloaderCleanedUp'));
+    }
+
     if (!preloader || !preloaderFill || !preloaderPercent) {
       finish();
       return;
@@ -110,6 +116,7 @@
           setTimeout(function () {
             preloader.remove();
             document.body.classList.remove('loading');
+            document.dispatchEvent(new CustomEvent('preloaderCleanedUp'));
           }, FADE_TIME);
         }, HOLD_DELAY);
       }

@@ -103,11 +103,54 @@
       fillPath.style.strokeDashoffset = offset;
     }
 
+    let drawFrameId = null;
+    function requestDrawPath() {
+      if (drawFrameId) {
+        cancelAnimationFrame(drawFrameId);
+      }
+      drawFrameId = requestAnimationFrame(drawPath);
+    }
+
     // Initialize the path drawing
-    drawPath();
+    requestDrawPath();
 
     // Re-calculate the curve math whenever the browser window is resized
-    window.addEventListener('resize', drawPath, { passive: true });
+    window.addEventListener('resize', requestDrawPath, { passive: true });
+
+    // Re-calculate when the page is fully loaded (images, stylesheets, fonts)
+    window.addEventListener('load', requestDrawPath, { passive: true });
+
+    // Re-calculate when fonts are ready
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(requestDrawPath);
+    }
+
+    // Re-calculate when preloader is done
+    document.addEventListener('preloaderDone', () => {
+      setTimeout(requestDrawPath, 50);
+    });
+
+    // Re-calculate when preloader is completely cleaned up (scrollbars restored)
+    document.addEventListener('preloaderCleanedUp', requestDrawPath);
+
+    // Use ResizeObserver to detect layout/size changes of the timeline container
+    if (window.ResizeObserver) {
+      const resizeObserver = new ResizeObserver(requestDrawPath);
+      resizeObserver.observe(timeline);
+    }
+
+    // Use IntersectionObserver to draw the path when the timeline becomes visible
+    if (window.IntersectionObserver) {
+      const visibilityObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            requestDrawPath();
+            visibilityObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.05 });
+      visibilityObserver.observe(timeline);
+    }
 
     // Update the glowing stroke offset as the user scrolls
     window.addEventListener('scroll', updateScroll, { passive: true });
