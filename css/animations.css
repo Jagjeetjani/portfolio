@@ -1,0 +1,190 @@
+/* ============================================ */
+/* ANIMATIONS.CSS — Keyframes & Scroll Classes   */
+/* ============================================ */
+
+/* --- Keyframes --- */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes pulse {
+  0% { transform: translateY(-50%) scale(1); box-shadow: 0 0 15px rgba(250, 204, 21, 0.4); }
+  50% { transform: translateY(-50%) scale(1.2); box-shadow: 0 0 25px rgba(250, 204, 21, 0.7); }
+  100% { transform: translateY(-50%) scale(1); box-shadow: 0 0 15px rgba(250, 204, 21, 0.4); }
+}
+
+@keyframes glow {
+  0% { box-shadow: 0 0 10px rgba(124, 58, 237, 0.2); }
+  50% { box-shadow: 0 0 30px rgba(124, 58, 237, 0.6); }
+  100% { box-shadow: 0 0 10px rgba(124, 58, 237, 0.2); }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-15px); }
+  60% { transform: translateY(-7px); }
+}
+
+@keyframes bounce-center {
+  0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+  40% { transform: translateX(-50%) translateY(-15px); }
+  60% { transform: translateX(-50%) translateY(-7px); }
+}
+
+@keyframes wave {
+  0% { transform: rotate(0deg); }
+  10% { transform: rotate(14deg); }
+  20% { transform: rotate(-8deg); }
+  30% { transform: rotate(14deg); }
+  40% { transform: rotate(-4deg); }
+  50% { transform: rotate(10deg); }
+  60% { transform: rotate(0deg); }
+  100% { transform: rotate(0deg); }
+}
+
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink {
+  from, to { border-color: transparent; }
+  50% { border-color: var(--accent-cyan); }
+}
+
+@keyframes orbit {
+  from { transform: rotate(0deg) translateX(var(--orbit-radius)) rotate(0deg); }
+  to { transform: rotate(360deg) translateX(var(--orbit-radius)) rotate(-360deg); }
+}
+
+@keyframes spinIn {
+  from { opacity: 0; transform: rotate(-180deg) scale(0); }
+  to { opacity: 1; transform: rotate(0) scale(1); }
+}
+
+@keyframes charReveal {
+  from { opacity: 0; transform: translateY(100%); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes borderRotate {
+  100% { transform: rotate(1turn); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+@keyframes audioWave {
+  from { height: 3px; }
+  to { height: 100%; }
+}
+
+/* --- Scroll-Reveal Classes --- */
+
+.animate-on-scroll {
+  opacity: 0;
+  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform, filter;
+}
+
+/* Default Reveal (Fade Up) */
+.animate-on-scroll:not(.reveal-left):not(.reveal-right):not(.reveal-scale):not(.reveal-blur) {
+  transform: translateY(40px);
+}
+
+.reveal-left { transform: translateX(-60px); }
+.reveal-right { transform: translateX(60px); }
+.reveal-scale { transform: scale(0.85); }
+.reveal-blur { filter: blur(10px); transform: translateY(20px); }
+
+/* Automatic Timeline Mappings */
+.timeline-entry--right.animate-on-scroll { transform: translateX(60px); }
+.timeline-entry--left.animate-on-scroll { transform: translateX(-60px); }
+
+/* Visible State */
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: none;
+  filter: blur(0);
+}
+
+/* --- Utility Animation Classes --- */
+
+.text-reveal span {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(100%);
+  animation: charReveal 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: calc(var(--i) * 0.04s);
+}
+
+.stagger-1 { transition-delay: 0.1s; animation-delay: 0.1s; }
+.stagger-2 { transition-delay: 0.2s; animation-delay: 0.2s; }
+.stagger-3 { transition-delay: 0.3s; animation-delay: 0.3s; }
+.stagger-4 { transition-delay: 0.4s; animation-delay: 0.4s; }

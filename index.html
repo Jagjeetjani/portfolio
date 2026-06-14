@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jagjeet Singh â€” CSE Student & Flutter Developer</title>
+  <meta name="description" content="Portfolio of Jagjeet Singh, a Computer Science student at Chandigarh University. Flutter developer, competitive programmer, and open-source enthusiast.">
+  <meta name="keywords" content="Jagjeet Singh, portfolio, developer, Flutter, C++, CSE, Chandigarh University, IoT, ESP32">
+  <meta property="og:title" content="Jagjeet Singh â€” Portfolio">
+  <meta property="og:description" content="CSE Student â€¢ Flutter Developer â€¢ Problem Solver">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#7c3aed">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/sections.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/terminal.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <!-- ============================================ -->
+  <!-- PRELOADER                                     -->
+  <!-- ============================================ -->
+  <div id="preloader" aria-hidden="true">
+    <div class="preloader-content">
+      <div class="preloader-monogram">
+        <span class="monogram-j">J</span>
+        <span class="monogram-s">S</span>
+      </div>
+      <div class="preloader-bar">
+        <div class="preloader-fill" id="preloaderFill"></div>
+      </div>
+      <div class="preloader-percent" id="preloaderPercent">0%</div>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- SCROLL PROGRESS BAR                           -->
+  <!-- ============================================ -->
+  <div id="scroll-progress" aria-hidden="true"></div>
+
+  <!-- ============================================ -->
+  <!-- GLOBAL GRADIENT BLOB                          -->
+  <!-- ============================================ -->
+  <div class="global-gradient-blob" aria-hidden="true"></div>
+
+  <!-- ============================================ -->
+  <!-- CUSTOM CURSOR                                 -->
+  <!-- ============================================ -->
+  <div class="cursor-trail" aria-hidden="true"></div>
+
+  <!-- ============================================ -->
+  <!-- CANVAS â€” PARTICLE BACKGROUND                  -->
+  <!-- ============================================ -->
+  <canvas id="particleCanvas" aria-hidden="true"></canvas>
+
+  <!-- ============================================ -->
+  <!-- NAVIGATION                                    -->
+  <!-- ============================================ -->
+  <nav class="navbar" id="navbar">
+    <a href="#hero" class="nav-logo" aria-label="Home">
+      <span class="logo-text">JS<span class="logo-dot">.</span></span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about" class="nav-link" data-section="about">About</a></li>
+      <li><a href="#skills" class="nav-link" data-section="skills">Skills</a></li>
+      <li><a href="#projects" class="nav-link" data-section="projects">Projects</a></li>
+      <li><a href="#timeline" class="nav-link" data-section="timeline">Journey</a></li>
+      <li><a href="#education" class="nav-link" data-section="education">Education</a></li>
+      <li><a href="#contact" class="nav-link nav-link--cta" data-section="contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ============================================ -->
+  <!-- SECTION: HERO                                 -->
+  <!-- ============================================ -->
+  <section id="hero" class="section hero-section">
+    <div class="hero-content">
+      <p class="hero-greeting animate-on-scroll">Hello, I'm</p>
+      <div class="animate-on-scroll" style="animation-delay: 0.1s">
+        <h1 class="hero-name" id="heroName">JAGJEET SINGH</h1>
+      </div>
+      <div class="hero-tagline-wrapper">
+        <p class="hero-tagline" id="heroTagline">CSE Student • Flutter Developer • Problem Solver</p>
+      </div>
+      <div class="hero-socials">
+        <a href="https://github.com/Jagjeetjani" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="GitHub" data-cursor-hover>
+          <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/jagjeet-singh-a316a0377/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn" data-cursor-hover>
+          <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram" data-cursor-hover>
+          <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        </a>
+        <a href="mailto:jagjeetsinghjani3@gmail.com" class="social-icon" aria-label="Email" data-cursor-hover>
+          <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="scroll-indicator" aria-hidden="true">
+      <span class="scroll-text">Scroll to explore</span>
+      <div class="scroll-chevron">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- SECTION: ABOUT                                -->
+  <!-- ============================================ -->
+  <section id="about" class="section about-section">
+    <div class="section-glow section-glow--violet" aria-hidden="true"></div>
+    <div class="container about-grid">
+      <!-- Photo Column -->
+      <div class="about-photo-col animate-on-scroll reveal-scale">
+        <div class="about-photo-wrapper">
+          <img src="assets/images/PHOTO.jpg" alt="Jagjeet Singh" class="about-photo" loading="lazy">
+          <div class="photo-border-glow" aria-hidden="true"></div>
+        </div>
+        <div class="orbiting-icons" aria-hidden="true">
+          <span class="orbit-icon" style="--orbit-delay: 0s; --orbit-radius: 120px;">
+            <svg viewBox="0 0 24 24" width="28" height="28"><path fill="#e34f26" d="M1.5 0h21l-1.91 21.563L11.977 24l-8.564-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.071-.757.541-6.025H5.745l1.399 15.562h8.424l-.441 4.605-3.154.856-3.138-.852-.201-2.244H6.12l.399 4.427 5.455 1.518 5.471-1.52.636-7.07H8.531z"/></svg>
+          </span>
+          <span class="orbit-icon" style="--orbit-delay: -2s; --orbit-radius: 130px;">
+            <svg viewBox="0 0 24 24" width="28" height="28"><path fill="#1572b6" d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm17.09 4.413L5.41 4.41l.213 2.622 10.125.002-.255 2.716h-6.64l.24 2.573h6.182l-.366 3.523-2.91.804-2.956-.81-.188-2.11h-2.61l.29 3.855L12 19.002l5.355-1.12.926-9.692-.046-.46z"/></svg>
+          </span>
+          <span class="orbit-icon" style="--orbit-delay: -4s; --orbit-radius: 125px;">
+            <svg viewBox="0 0 24 24" width="28" height="28"><path fill="#00599c" d="M22.394 6c-.167-.29-.398-.543-.652-.69L12.926.22c-.509-.294-1.34-.294-1.848 0L2.26 5.31c-.508.293-.923 1.013-.923 1.6v10.18c0 .294.104.62.271.91.167.29.398.543.652.69l8.816 5.09c.508.293 1.34.293 1.848 0l8.816-5.09c.254-.147.485-.4.652-.69.167-.29.27-.616.27-.91V6.91c.003-.294-.1-.62-.268-.91zM12 19.11c-3.92 0-7.109-3.19-7.109-7.11 0-3.92 3.19-7.11 7.109-7.11a7.133 7.133 0 016.156 3.553l-3.076 1.78a3.567 3.567 0 00-3.08-1.78A3.56 3.56 0 008.444 12 3.56 3.56 0 0012 15.555a3.57 3.57 0 003.08-1.778l3.078 1.78A7.135 7.135 0 0112 19.11zm7.109-6.715h-.79v.79h-.79v-.79h-.79v-.79h.79v-.79h.79v.79h.79v.79zm2.962 0h-.79v.79h-.79v-.79h-.79v-.79h.79v-.79h.79v.79h.79v.79z"/></svg>
+          </span>
+          <span class="orbit-icon" style="--orbit-delay: -6s; --orbit-radius: 135px;">
+            <svg viewBox="0 0 24 24" width="28" height="28"><path fill="#02569B" d="M14.314 0L2.3 12 6 15.7 21.684.013h-7.357zm.014 11.072L7.857 17.53l6.47 6.47H21.7l-6.46-6.468 6.46-6.46h-7.37z"/></svg>
+          </span>
+          <span class="orbit-icon" style="--orbit-delay: -8s; --orbit-radius: 128px;">
+            <svg viewBox="0 0 24 24" width="28" height="28"><path fill="#41B883" d="M14.314 0L2.3 12 6 15.7 21.684.013h-7.357z"/><path fill="#FFCA28" d="M23.527 3.684A4.5 4.5 0 0020.294 0H3.706a4.5 4.5 0 00-3.233 3.684L12 19.09z" opacity=".7"/></svg>
+          </span>
+          <span class="orbit-icon" style="--orbit-delay: -10s; --orbit-radius: 122px;">
+            <svg viewBox="0 0 24 24" width="28" height="28"><path fill="#F05032" d="M23.546 10.93L13.067.452c-.604-.603-1.582-.603-2.188 0L8.708 2.627l2.76 2.76c.645-.215 1.379-.07 1.889.441.516.515.658 1.258.438 1.9l2.66 2.66c.645-.222 1.387-.078 1.9.435.721.72.721 1.884 0 2.604-.72.719-1.886.719-2.605 0-.516-.515-.658-1.26-.438-1.9l-2.48-2.48v6.53c.175.087.34.2.486.348.713.72.713 1.883 0 2.6-.719.721-1.889.721-2.609 0-.719-.72-.719-1.88 0-2.6.177-.178.363-.3.552-.394v-6.59c-.19-.09-.376-.217-.553-.394-.52-.52-.66-1.27-.436-1.91L7.87 4.126.453 11.543c-.603.605-.603 1.582 0 2.188l10.48 10.477c.604.604 1.582.604 2.186 0l10.43-10.43c.605-.607.605-1.584-.003-2.187"/></svg>
+          </span>
+        </div>
+      </div>
+      <!-- Bio Column -->
+      <div class="about-text-col">
+        <span class="section-label animate-on-scroll">ABOUT ME</span>
+        <h2 class="section-heading animate-on-scroll">Crafting Code,<br>One Line at a Time</h2>
+        <p class="about-bio animate-on-scroll reveal-left">
+          Hey! I'm Jagjeet Singh — a first-year Computer Science student at Chandigarh University who doesn't believe in waiting to build big things. In just one year, I've gone from writing my first "Hello World" to architecting a full-stack service marketplace with Flutter, Firebase, and Cloud Functions.
+        </p>
+        <p class="about-bio animate-on-scroll reveal-left">
+          I live for the thrill of solving complex problems — whether it's designing scalable Clean Architecture patterns, implementing real-time chat systems, or grinding competitive programming contests. When I'm not shipping features, you'll find me contributing to open-source or learning the next technology that catches my eye.
+        </p>
+        <p class="about-bio animate-on-scroll reveal-left">
+          I believe great software isn't just functional — it's an experience.
+        </p>
+        <div class="about-stats animate-on-scroll">
+          <div class="stat-item">
+            <span class="stat-number" data-count="15">0</span><span class="stat-plus">+</span>
+            <span class="stat-label">Projects Built</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number" data-count="10">0</span><span class="stat-plus">+</span>
+            <span class="stat-label">Technologies</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number" data-count="1">0</span>
+            <span class="stat-label">Year of Coding</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number stat-infinity">∞</span>
+            <span class="stat-label">Curiosity Level</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- SECTION: SKILLS                               -->
+  <!-- ============================================ -->
+  <section id="skills" class="section skills-section">
+    <div class="section-glow section-glow--cyan" aria-hidden="true"></div>
+    <div class="container">
+      <span class="section-label animate-on-scroll">SKILLS & TECHNOLOGIES</span>
+      <h2 class="section-heading animate-on-scroll">My Tech Arsenal</h2>
+      <div class="skills-layout">
+        <!-- Radar Chart -->
+        <div class="skills-chart-container animate-on-scroll">
+          <div id="radarChart" class="radar-chart-wrapper"></div>
+        </div>
+        <!-- Skill Bars -->
+        <div class="skills-bars-container">
+          <div class="skill-category animate-on-scroll">
+            <h3 class="skill-category-title">Languages</h3>
+            <div class="skill-bar" data-skill="C / C++" data-level="70">
+              <div class="skill-info"><span class="skill-name">C / C++</span><span class="skill-percent">0%</span></div>
+              <div class="skill-track"><div class="skill-fill"></div></div>
+            </div>
+            <div class="skill-bar" data-skill="Dart" data-level="80">
+              <div class="skill-info"><span class="skill-name">Dart</span><span class="skill-percent">0%</span></div>
+              <div class="skill-track"><div class="skill-fill"></div></div>
+            </div>
+            <div class="skill-bar" data-skill="HTML / CSS" data-level="75">
+              <div class="skill-info"><span class="skill-name">HTML / CSS</span><span class="skill-percent">0%</span></div>
+              <div class="skill-track"><div class="skill-fill"></div></div>
+            </div>
+            <div class="skill-bar" data-skill="JavaScript" data-level="60">
+              <div class="skill-info"><span class="skill-name">JavaScript</span><span class="skill-percent">0%</span></div>
+              <div class="skill-track"><div class="skill-fill"></div></div>
+            </div>
+          </div>
+          <div class="skill-category animate-on-scroll">
+            <h3 class="skill-category-title">Frameworks & Tools</h3>
+            <div class="skill-bar" data-skill="Flutter" data-level="80">
+              <div class="skill-info"><span class="skill-name">Flutter</span><span class="skill-percent">0%</span></div>
+              <div class="skill-track"><div class="skill-fill"></div></div>
+            </div>
+            <div class="skill-bar" data-skill="Firebase" data-level="75">
+              <div class="skill-info"><span class="skill-name">Firebase</span><span class="skill-percent">0%</span></div>
+              <div class="skill-track"><div class="skill-fill"></div></div>
+            </div>
+            <div class="skill-bar" data-skill="Git / GitHub" data-level="65">
+              <div class="skill-info"><span class="skill-name">Git / GitHub</span><span class="skill-percent">0%</span></div>
+              <div class="skill-track"><div class="skill-fill"></div></div>
+            </div>
+          </div>
+          <div class="skill-category animate-on-scroll">
+            <h3 class="skill-category-title">Concepts</h3>
+            <div class="skill-bar" data-skill="Problem Solving" data-level="85">
+              <div class="skill-info"><span class="skill-name">Problem Solving</span><span class="skill-percent">0%</span></div>
+              <div class="skill-track"><div class="skill-fill"></div></div>
+            </div>
+            <div class="skill-bar" data-skill="DSA" data-level="75">
+              <div class="skill-info"><span class="skill-name">DSA</span><span class="skill-percent">0%</span></div>
+              <div class="skill-track"><div class="skill-fill"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Skill Cards Grid -->
+      <div class="skill-cards-grid">
+        <div class="skill-card animate-on-scroll reveal-blur" data-tilt>
+          <div class="skill-card-icon">
+            <svg viewBox="0 0 24 24" width="40" height="40"><path fill="#02569B" d="M14.314 0L2.3 12 6 15.7 21.684.013h-7.357zm.014 11.072L7.857 17.53l6.47 6.47H21.7l-6.46-6.468 6.46-6.46h-7.37z"/></svg>
+          </div>
+          <h4 class="skill-card-name">Flutter</h4>
+          <span class="skill-card-level">Advanced</span>
+        </div>
+        <div class="skill-card animate-on-scroll reveal-blur" data-tilt>
+          <div class="skill-card-icon">
+            <svg viewBox="0 0 24 24" width="40" height="40"><path fill="#FFCA28" d="M3.89 15.673L6.255.461h11.49l-2.367 15.212L12 18.009zM17.4 1.262H6.6L4.353 15.09l7.647 2.25 7.647-2.25z"/><path fill="#F57C00" d="M12 16.938l-5.22-1.537L8.64 3.264h6.72L17.22 15.4z"/></svg>
+          </div>
+          <h4 class="skill-card-name">Firebase</h4>
+          <span class="skill-card-level">Advanced</span>
+        </div>
+        <div class="skill-card animate-on-scroll reveal-blur" data-tilt>
+          <div class="skill-card-icon">
+            <svg viewBox="0 0 24 24" width="40" height="40"><path fill="#00599c" d="M22.394 6c-.167-.29-.398-.543-.652-.69L12.926.22c-.509-.294-1.34-.294-1.848 0L2.26 5.31c-.508.293-.923 1.013-.923 1.6v10.18c0 .294.104.62.271.91.167.29.398.543.652.69l8.816 5.09c.508.293 1.34.293 1.848 0l8.816-5.09c.254-.147.485-.4.652-.69.167-.29.27-.616.27-.91V6.91c.003-.294-.1-.62-.268-.91z"/></svg>
+          </div>
+          <h4 class="skill-card-name">C / C++</h4>
+          <span class="skill-card-level">Intermediate</span>
+        </div>
+        <div class="skill-card animate-on-scroll reveal-blur" data-tilt>
+          <div class="skill-card-icon">
+            <svg viewBox="0 0 24 24" width="40" height="40"><path fill="#e34f26" d="M1.5 0h21l-1.91 21.563L11.977 24l-8.564-2.438L1.5 0z"/></svg>
+          </div>
+          <h4 class="skill-card-name">HTML / CSS</h4>
+          <span class="skill-card-level">Intermediate</span>
+        </div>
+        <div class="skill-card animate-on-scroll reveal-blur" data-tilt>
+          <div class="skill-card-icon">
+            <svg viewBox="0 0 24 24" width="40" height="40"><path fill="#84cc16" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          </div>
+          <h4 class="skill-card-name">Git</h4>
+          <span class="skill-card-level">Intermediate</span>
+        </div>
+        <div class="skill-card animate-on-scroll reveal-blur" data-tilt>
+          <div class="skill-card-icon">
+            <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="#06b6d4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
+          </div>
+          <h4 class="skill-card-name">IoT / ESP32</h4>
+          <span class="skill-card-level">Intermediate</span>
+        </div>
+        <div class="skill-card animate-on-scroll reveal-blur" data-tilt>
+          <div class="skill-card-icon">
+            <svg viewBox="-11.5 -10.232 23 20.463" width="40" height="40"><circle r="2.05" fill="#61dafb"/><g stroke="#61dafb" stroke-width="1.5" fill="none"><ellipse rx="11" ry="4.2"/><ellipse rx="11" ry="4.2" transform="rotate(60)"/><ellipse rx="11" ry="4.2" transform="rotate(120)"/></g></svg>
+          </div>
+          <h4 class="skill-card-name">React / Next.js</h4>
+          <span class="skill-card-level">Advanced</span>
+        </div>
+        <div class="skill-card animate-on-scroll reveal-blur" data-tilt>
+          <div class="skill-card-icon">
+            <svg viewBox="0 0 24 24" width="40" height="40"><path fill="#339933" d="M12 2L2 7.8v8.4L12 22l10-5.8V7.8L12 2zm0 1.2l8.8 5.1-8.8 5.1-8.8-5.1L12 3.2zm-9 6v7.3l8.4 4.8v-9.6L3 9.2zm18 0l-8.4 4.8v9.6l8.4-4.8V9.2z"/></svg>
+          </div>
+          <h4 class="skill-card-name">Node.js</h4>
+          <span class="skill-card-level">Intermediate</span>
+        </div>
+        <div class="skill-card animate-on-scroll reveal-blur" data-tilt>
+          <div class="skill-card-icon">
+            <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="#ec4899" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <h4 class="skill-card-name">UI / UX Design</h4>
+          <span class="skill-card-level">Advanced</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- SECTION: PROJECTS                             -->
+  <!-- ============================================ -->
+  <section id="projects" class="section projects-section">
+    <div class="section-glow section-glow--magenta" aria-hidden="true"></div>
+    <div class="container">
+      <span class="section-label animate-on-scroll">FEATURED WORK</span>
+      <h2 class="section-heading animate-on-scroll">Projects I've Built</h2>
+      <div class="bento-grid">
+        <!-- Project 1: Vendr (Featured) -->
+        <article class="bento-card bento-card--featured span-2x2 animate-on-scroll reveal-scale" data-tilt>
+          <div class="project-image-wrapper">
+            <img src="assets/images/project-1.jpg" alt="Vendr - Service Marketplace App" class="project-image" loading="lazy">
+            <div class="project-image-overlay"></div>
+            <span class="project-badge">★ Featured</span>
+          </div>
+          <div class="project-content">
+            <span class="project-number">01</span>
+            <h3 class="project-title">Vendr</h3>
+            <p class="project-description">A premium, full-stack mobile service marketplace connecting customers with local service providers. Features dual-role system, real-time chat, Razorpay payments, location-based search, vendor analytics dashboard, and a robust review system — all built with Clean Architecture.</p>
+            <div class="project-tags">
+              <span class="project-tag" style="--tag-color: #02569B">Flutter</span>
+              <span class="project-tag" style="--tag-color: #FFCA28">Firebase</span>
+              <span class="project-tag" style="--tag-color: #7c3aed">Riverpod</span>
+              <span class="project-tag" style="--tag-color: #06b6d4">Cloud Functions</span>
+              <span class="project-tag" style="--tag-color: #ec4899">Razorpay</span>
+            </div>
+            <div class="project-actions">
+              <a href="#" class="btn btn--primary" data-cursor-hover>View Project</a>
+              <a href="#" class="btn btn--outline" data-cursor-hover>Source Code</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 2: CampusConnect -->
+        <article class="bento-card span-1x1 animate-on-scroll reveal-scale" style="transition-delay: 0.1s" data-tilt>
+          <div class="project-image-wrapper">
+            <img src="assets/images/project-2.jpg" alt="CampusConnect - College Utility Website" class="project-image" loading="lazy">
+            <div class="project-image-overlay"></div>
+          </div>
+          <div class="project-content">
+            <span class="project-number">02</span>
+            <h3 class="project-title">CampusConnect</h3>
+            <p class="project-description">A comprehensive college utility website for Chandigarh University featuring a lost & found system and nearby directories.</p>
+            <div class="project-tags">
+              <span class="project-tag" style="--tag-color: #e34f26">HTML/CSS</span>
+              <span class="project-tag" style="--tag-color: #f7df1e">JavaScript</span>
+            </div>
+            <div class="project-actions">
+              <a href="#" class="btn btn--outline" data-cursor-hover>Source Code</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 3: NexusEngine -->
+        <article class="bento-card span-1x1 animate-on-scroll reveal-scale" style="transition-delay: 0.2s" data-tilt>
+          <div class="project-image-wrapper">
+            <img src="assets/images/project-3.jpg" alt="NexusEngine - Terminal Game Engine" class="project-image" loading="lazy">
+            <div class="project-image-overlay"></div>
+          </div>
+          <div class="project-content">
+            <span class="project-number">03</span>
+            <h3 class="project-title">NexusEngine</h3>
+            <p class="project-description">A terminal-based game engine in C++ featuring pathfinding AI, turn-based combat, and ASCII-rendered maps.</p>
+            <div class="project-tags">
+              <span class="project-tag" style="--tag-color: #00599c">C++</span>
+              <span class="project-tag" style="--tag-color: #06b6d4">STL</span>
+            </div>
+            <div class="project-actions">
+              <a href="#" class="btn btn--outline" data-cursor-hover>Source Code</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 4: CampusMart -->
+        <article class="bento-card bento-card--campusmart span-2x2 animate-on-scroll reveal-scale" style="transition-delay: 0.1s" data-tilt>
+          <div class="project-image-wrapper">
+            <img src="assets/images/campusmart.jpg" alt="CampusMart - Campus Marketplace" class="project-image" loading="lazy">
+            <div class="project-image-overlay" style="background: linear-gradient(to bottom, transparent 20%, #110900 100%); opacity: 0.9;"></div>
+            <span class="project-badge project-badge--orange">★ New</span>
+          </div>
+          <div class="project-content">
+            <span class="project-number">04</span>
+            <h3 class="project-title">CampusMart</h3>
+            <p class="project-description">The marketplace built specifically for your campus. Buy and sell textbooks, electronics, and furniture — anything. No shipping, no fees. Just walk over and pick it up. Features a sleek, dark-mode real-time trading dashboard.</p>
+            <div class="project-tags">
+              <span class="project-tag" style="--tag-color: #61DAFB">React</span>
+              <span class="project-tag" style="--tag-color: #ffffff">Next.js</span>
+              <span class="project-tag" style="--tag-color: #38bdf8">Tailwind</span>
+              <span class="project-tag" style="--tag-color: #ff6b00">UI/UX</span>
+            </div>
+            <div class="project-actions">
+              <a href="#" class="btn btn--primary" style="background: var(--gradient-accent); border: none;" data-cursor-hover>View Project</a>
+              <a href="#" class="btn btn--outline" data-cursor-hover>Source Code</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 5: ESP32 RoboCar -->
+        <article class="bento-card span-1x2 animate-on-scroll reveal-scale" style="transition-delay: 0.2s" data-tilt>
+          <div class="project-image-wrapper" style="height: 40%;">
+            <img src="assets/images/project-4.jpg" alt="ESP32 RoboCar - IoT Robotic Car" class="project-image" loading="lazy">
+            <div class="project-image-overlay"></div>
+          </div>
+          <div class="project-content">
+            <span class="project-number">05</span>
+            <h3 class="project-title">ESP32 RoboCar</h3>
+            <p class="project-description">A web-application-controlled robotic car powered by ESP32 microcontroller. Features a real-time browser dashboard for directional control, speed adjustment, and live sensor feedback — showcasing IoT and embedded systems.</p>
+            <div class="project-tags">
+              <span class="project-tag" style="--tag-color: #00599c">C/C++</span>
+              <span class="project-tag" style="--tag-color: #06b6d4">ESP32</span>
+              <span class="project-tag" style="--tag-color: #f7df1e">WebSocket</span>
+              <span class="project-tag" style="--tag-color: #84cc16">IoT</span>
+            </div>
+            <div class="project-actions" style="margin-top: auto; flex-direction: column;">
+              <a href="#" class="btn btn--outline" data-cursor-hover>Source Code</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 6: Digital Wardrobe -->
+        <article class="bento-card bento-card--wardrobe span-2x2 animate-on-scroll reveal-scale" style="transition-delay: 0.3s" data-tilt>
+          <div class="project-image-wrapper">
+            <img src="assets/images/digital-wardrobe.jpg" alt="Digital Wardrobe - Fashion Assistant" class="project-image" loading="lazy">
+            <div class="project-image-overlay" style="background: linear-gradient(to bottom, transparent 20%, #0a0514 100%); opacity: 0.9;"></div>
+            <span class="project-badge project-badge--magenta">★ New</span>
+          </div>
+          <div class="project-content">
+            <span class="project-number">06</span>
+            <h3 class="project-title">Digital Wardrobe</h3>
+            <p class="project-description">Your personal fashion assistant. A sleek web application that helps you digitize your closet, track wardrobe health, check season readiness, and get instant outfit inspiration. Built with a stunning dark-mode dashboard.</p>
+            <div class="project-tags">
+              <span class="project-tag" style="--tag-color: #61DAFB">React</span>
+              <span class="project-tag" style="--tag-color: #ec4899">Tailwind</span>
+              <span class="project-tag" style="--tag-color: #8b5cf6">Node.js</span>
+              <span class="project-tag" style="--tag-color: #06b6d4">UI/UX</span>
+            </div>
+            <div class="project-actions">
+              <a href="#" class="btn btn--primary" style="background: linear-gradient(135deg, #ec4899, #8b5cf6); border: none;" data-cursor-hover>View Project</a>
+              <a href="#" class="btn btn--outline" data-cursor-hover>Source Code</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 7: GitHub Call to Action -->
+        <article class="bento-card bento-card--github span-1x2 animate-on-scroll reveal-scale" style="transition-delay: 0.4s" data-tilt>
+          <div class="project-content" style="align-items: center; justify-content: center; padding: 3rem 2rem;">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 1.5rem; color: var(--text-primary);"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+            <h3 class="project-title" style="text-align: center;">More on GitHub</h3>
+            <p class="project-description" style="text-align: center; margin-bottom: 2rem;">Want to see more? Check out my GitHub for more open-source projects, experiments, and contributions.</p>
+            <a href="https://github.com/Jagjeetjani" class="btn btn--outline" style="width: 100%; border-color: rgba(255, 255, 255, 0.2);" data-cursor-hover target="_blank">View GitHub</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- SECTION: TIMELINE                             -->
+  <!-- ============================================ -->
+  <section id="timeline" class="section timeline-section">
+    <div class="section-glow section-glow--yellow" aria-hidden="true"></div>
+    <div class="container">
+      <span class="section-label animate-on-scroll">MY JOURNEY</span>
+      <h2 class="section-heading animate-on-scroll">The Road So Far</h2>
+      <div class="timeline">
+        <svg class="timeline-svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="timeline-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="var(--accent-cyan)" />
+              <stop offset="50%" stop-color="var(--accent-magenta)" />
+              <stop offset="100%" stop-color="var(--accent-violet)" />
+            </linearGradient>
+          </defs>
+          <path class="timeline-path-bg" />
+          <path class="timeline-path-fill" />
+        </svg>
+
+        <div class="timeline-entry timeline-entry--right animate-on-scroll">
+          <div class="timeline-dot" aria-hidden="true"></div>
+          <div class="timeline-card glass">
+            <span class="timeline-date">2025</span>
+            <h3 class="timeline-title">🎓 Started B.E. CSE</h3>
+            <p class="timeline-text">Joined Chandigarh University, embarking on a Computer Science & Engineering journey.</p>
+          </div>
+        </div>
+
+        <div class="timeline-entry timeline-entry--left animate-on-scroll">
+          <div class="timeline-dot" aria-hidden="true"></div>
+          <div class="timeline-card glass">
+            <span class="timeline-date">2025</span>
+            <h3 class="timeline-title">💻 Mastered C/C++</h3>
+            <p class="timeline-text">Learned core fundamentals, dove deep into data structures & started competitive programming.</p>
+          </div>
+        </div>
+
+        <div class="timeline-entry timeline-entry--right animate-on-scroll">
+          <div class="timeline-dot" aria-hidden="true"></div>
+          <div class="timeline-card glass">
+            <span class="timeline-date">2025</span>
+            <h3 class="timeline-title">📱 Discovered Flutter & Firebase</h3>
+            <p class="timeline-text">Started mobile app development, learned Clean Architecture and modern state management.</p>
+          </div>
+        </div>
+
+        <div class="timeline-entry timeline-entry--left animate-on-scroll">
+          <div class="timeline-dot" aria-hidden="true"></div>
+          <div class="timeline-card glass">
+            <span class="timeline-date">2025–26</span>
+            <h3 class="timeline-title">🛒 Built Vendr</h3>
+            <p class="timeline-text">Architected a full-stack service marketplace with Razorpay payments, real-time chat, Cloud Functions & vendor analytics.</p>
+          </div>
+        </div>
+
+        <div class="timeline-entry timeline-entry--right animate-on-scroll">
+          <div class="timeline-dot" aria-hidden="true"></div>
+          <div class="timeline-card glass">
+            <span class="timeline-date">2026</span>
+            <h3 class="timeline-title">🌐 Built CampusConnect</h3>
+            <p class="timeline-text">Created a college utility website with lost & found, cafe directory & campus tools for CU students.</p>
+          </div>
+        </div>
+
+        <div class="timeline-entry timeline-entry--left animate-on-scroll">
+          <div class="timeline-dot" aria-hidden="true"></div>
+          <div class="timeline-card glass">
+            <span class="timeline-date">2026</span>
+            <h3 class="timeline-title">🏆 Completed First Year</h3>
+            <p class="timeline-text">Solid CS foundation, 15+ projects shipped, 10+ technologies learned — and just getting started.</p>
+          </div>
+        </div>
+
+        <div class="timeline-entry timeline-entry--right animate-on-scroll">
+          <div class="timeline-dot" aria-hidden="true"></div>
+          <div class="timeline-card glass">
+            <span class="timeline-date">2026</span>
+            <h3 class="timeline-title">🚀 Open Source & Beyond</h3>
+            <p class="timeline-text">Contributing to open-source communities and exploring IoT, embedded systems & new frontiers.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- SECTION: EDUCATION                            -->
+  <!-- ============================================ -->
+  <section id="education" class="section education-section">
+    <div class="section-glow section-glow--violet" aria-hidden="true"></div>
+    <div class="container">
+      <span class="section-label animate-on-scroll">EDUCATION</span>
+      <h2 class="section-heading animate-on-scroll">Academic Background</h2>
+      <div class="education-cards">
+        <div class="education-card glass animate-on-scroll reveal-scale" data-tilt>
+          <div class="education-icon">🎓</div>
+          <h3 class="education-degree">Bachelor of Engineering (B.E.)</h3>
+          <p class="education-branch">Computer Science & Engineering</p>
+          <p class="education-university">Chandigarh University</p>
+          <div class="education-meta">
+            <span class="education-duration">2025 – 2029 (Expected)</span>
+            <span class="education-status">✅ First Year Completed</span>
+          </div>
+        </div>
+        <div class="education-card glass animate-on-scroll reveal-scale" style="transition-delay: 0.1s" data-tilt>
+          <div class="education-icon">🏫</div>
+          <h3 class="education-degree">Class 12th (Senior Secondary)</h3>
+          <p class="education-branch">Physics, Chemistry, Mathematics (PCM)</p>
+          <p class="education-university">DAV School, Abohar</p>
+          <div class="education-meta">
+            <span class="education-status">✅ Completed</span>
+          </div>
+        </div>
+        <div class="education-card glass animate-on-scroll reveal-scale" style="transition-delay: 0.2s" data-tilt>
+          <div class="education-icon">🏛️</div>
+          <h3 class="education-degree">Class 10th (Secondary)</h3>
+          <p class="education-branch">General Studies</p>
+          <p class="education-university">Assumption Convent School, Abohar</p>
+          <div class="education-meta">
+            <span class="education-status">✅ Completed</span>
+          </div>
+        </div>
+        <div class="education-card glass education-card--certs animate-on-scroll reveal-scale" style="transition-delay: 0.3s" data-tilt>
+          <div class="education-icon">📜</div>
+          <h3 class="education-degree">Certifications</h3>
+          <p class="education-branch">Always learning, always growing</p>
+          <div class="education-placeholder">
+            <span class="placeholder-plus">+</span>
+            <span class="placeholder-text">More coming soon</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- SECTION: CONTACT                              -->
+  <!-- ============================================ -->
+  <section id="contact" class="section contact-section">
+    <div class="section-glow section-glow--multi" aria-hidden="true"></div>
+    <div class="container">
+      <span class="section-label animate-on-scroll">GET IN TOUCH</span>
+      <h2 class="section-heading animate-on-scroll">Let's Connect <span class="wave-emoji">👋</span></h2>
+      <div class="contact-grid">
+        <!-- Contact Form -->
+        <form class="contact-form glass animate-on-scroll reveal-right" id="contactForm" action="https://formsubmit.co/jagjeetsinghjani3@gmail.com" method="POST">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_subject" value="Portfolio Contact — New Message!">
+          <div class="form-group">
+            <label for="contactName" class="form-label">Name</label>
+            <input type="text" id="contactName" name="name" class="form-input" placeholder="Your name" required>
+          </div>
+          <div class="form-group">
+            <label for="contactEmail" class="form-label">Email</label>
+            <input type="email" id="contactEmail" name="email" class="form-input" placeholder="your@email.com" required>
+          </div>
+          <div class="form-group">
+            <label for="contactMessage" class="form-label">Message</label>
+            <textarea id="contactMessage" name="message" class="form-input form-textarea" placeholder="Tell me about your project or just say hi!" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn btn--primary btn--submit" id="submitBtn" data-cursor-hover>
+            <span class="btn-text">Send Message</span>
+            <span class="btn-icon">→</span>
+          </button>
+        </form>
+        <!-- Contact Info -->
+        <div class="contact-info animate-on-scroll reveal-left">
+          <p class="contact-tagline">Have a project in mind, want to collaborate, or just want to say hello? My inbox is always open.</p>
+          <a href="mailto:jagjeetsinghjani3@gmail.com" class="contact-email" data-cursor-hover>jagjeetsinghjani3@gmail.com</a>
+          <div class="contact-socials">
+            <a href="https://github.com/Jagjeetjani" target="_blank" rel="noopener noreferrer" class="contact-social-link" aria-label="GitHub" data-cursor-hover>
+              <svg viewBox="0 0 24 24" fill="currentColor" width="32" height="32"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+              <span>GitHub</span>
+            </a>
+            <a href="https://www.linkedin.com/in/jagjeet-singh-a316a0377/" target="_blank" rel="noopener noreferrer" class="contact-social-link" aria-label="LinkedIn" data-cursor-hover>
+              <svg viewBox="0 0 24 24" fill="currentColor" width="32" height="32"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              <span>LinkedIn</span>
+            </a>
+            <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" class="contact-social-link" aria-label="Instagram" data-cursor-hover>
+              <svg viewBox="0 0 24 24" fill="currentColor" width="32" height="32"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+              <span>Instagram</span>
+            </a>
+          </div>
+          <a href="resume/Jagjeet_Singh_Resume.pdf" download class="btn btn--outline btn--resume" data-cursor-hover>
+            <span>📄 Download Resume</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- FOOTER                                        -->
+  <!-- ============================================ -->
+  <footer class="footer">
+    <p class="footer-text">Designed & Built by <strong>Jagjeet Singh</strong> © 2026</p>
+    <p class="footer-sub">Built with ❤️ and ☕</p>
+    <button class="back-to-top" id="backToTop" aria-label="Back to top" data-cursor-hover>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+    </button>
+  </footer>
+
+  <!-- ============================================ -->
+  <!-- TERMINAL EASTER EGG (Hidden)                  -->
+  <!-- ============================================ -->
+  <div class="terminal-overlay" id="terminalOverlay" aria-hidden="true">
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div class="terminal-buttons">
+          <span class="terminal-btn terminal-btn--close" id="terminalClose"></span>
+          <span class="terminal-btn terminal-btn--minimize"></span>
+          <span class="terminal-btn terminal-btn--maximize"></span>
+        </div>
+        <span class="terminal-title">jagjeet@portfolio:~</span>
+      </div>
+      <div class="terminal-body" id="terminalBody">
+        <div class="terminal-output" id="terminalOutput"></div>
+        <div class="terminal-input-line">
+          <span class="terminal-prompt">jagjeet@portfolio:~$</span>
+          <input type="text" class="terminal-input" id="terminalInput" spellcheck="false" autocomplete="off" autofocus>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- AUDIO TOGGLE                                  -->
+  <!-- ============================================ -->
+  <button class="audio-toggle" id="audioToggle" aria-label="Toggle background music" data-cursor-hover>
+    <span class="audio-icon" id="audioIcon">🔇</span>
+    <div class="audio-bars" id="audioBars">
+      <span class="audio-bar"></span>
+      <span class="audio-bar"></span>
+      <span class="audio-bar"></span>
+    </div>
+  </button>
+
+  <!-- ============================================ -->
+  <!-- SCRIPTS                                       -->
+  <!-- ============================================ -->
+  <script src="js/preloader.js"></script>
+  <script src="js/particles.js"></script>
+  <script src="js/cursor.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/skills-chart.js"></script>
+  <script src="js/timeline-map.js"></script>
+  <script src="js/terminal.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,249 @@
+/* ============================================ */
+/* RESPONSIVE.CSS — Media Queries               */
+/* ============================================ */
+
+/* --- Tablet Landscape (Max 1200px) --- */
+@media (max-width: 1200px) {
+  .container {
+    padding: 0 var(--space-md);
+  }
+  
+  .about-grid {
+    gap: 2rem;
+  }
+  
+  h1 { font-size: clamp(3rem, 7vw, 6rem); }
+  h2 { font-size: clamp(2rem, 4.5vw, 3rem); }
+}
+
+/* --- Tablet Portrait (Max 968px) --- */
+@media (max-width: 968px) {
+  .about-grid,
+  .skills-layout,
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
+  .bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .bento-card.span-3x1 {
+    grid-column: span 2;
+  }
+  
+  .about-photo-col {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+  
+  .about-photo {
+    width: 250px;
+    height: 250px;
+  }
+  
+  /* Orbit icons are now kept visible on tablet/mobile */
+  
+  .skills-chart-container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .timeline-entry--right,
+  .timeline-entry--left {
+    justify-content: flex-start;
+    padding-left: 40px;
+    padding-right: 0;
+  }
+  
+  .timeline-line {
+    left: 10px;
+  }
+  
+  .timeline-dot {
+    left: 2px;
+  }
+  
+  .timeline-card {
+    max-width: 100%;
+  }
+}
+
+/* --- Mobile (Max 768px) --- */
+@media (max-width: 768px) {
+  .nav-toggle {
+    display: flex; /* Show hamburger */
+  }
+  
+  .nav-links {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: var(--bg-deep);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    transform: translateY(-100%);
+    transition: transform 0.4s var(--ease-out-expo);
+    z-index: -1;
+  }
+  
+  .nav-links.active {
+    transform: translateY(0);
+  }
+  
+  .nav-link {
+    font-size: 1.5rem;
+  }
+  
+  .hero-name {
+    font-size: clamp(2.5rem, 10vw, 4rem);
+  }
+  
+  .hero-tagline, .hero-tagline-wrapper {
+    white-space: normal;
+    border-right: none;
+    width: auto;
+    animation: none;
+    height: auto;
+  }
+  body:not(.loading) .hero-tagline {
+    animation: none;
+    opacity: 1;
+  }
+  
+  .scroll-indicator {
+    display: none;
+  }
+  
+  .bento-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .bento-card, .span-2x2, .span-1x2, .span-3x1 {
+    grid-column: span 1 !important;
+    grid-row: span 1 !important;
+  }
+  
+  .bento-card.span-2x2 .project-image-wrapper {
+    height: 250px;
+  }
+  
+  .project-card {
+    grid-template-columns: 1fr; /* Stack image and content */
+    width: 90vw;
+  }
+  
+  .project-image-wrapper {
+    margin-bottom: 1.5rem;
+  }
+  
+  .education-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .about-stats {
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+  }
+  
+  .skill-cards-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  }
+  
+  .footer {
+    padding-bottom: 6rem; /* Make room for audio/top buttons */
+  }
+
+  .section {
+    min-height: auto;
+    padding: 3.5rem 0;
+  }
+  
+  .hero-section {
+    min-height: auto;
+    padding-top: 8rem;
+    padding-bottom: 2rem;
+  }
+}
+
+/* --- Small Mobile (Max 480px) --- */
+@media (max-width: 480px) {
+  .hero-name { font-size: 2.2rem; }
+  h1 { font-size: 2.2rem; }
+  h2 { font-size: 1.8rem; }
+  
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .project-actions {
+    flex-direction: column;
+  }
+  
+  .contact-socials {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .terminal-window {
+    width: 100%;
+    height: 100vh;
+    border-radius: 0;
+  }
+}
+
+/* --- Touch Devices & Reduced Motion --- */
+
+@media (hover: none) and (pointer: coarse) {
+  body {
+    cursor: auto !important;
+  }
+  
+  .custom-cursor,
+  .cursor-trail,
+  .trail-dot {
+    display: none !important;
+  }
+  
+  /* Disable hover effects that require hover to view info */
+  .project-image-overlay {
+    opacity: 0.5; /* Always show slightly */
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  #particleCanvas,
+  .custom-cursor,
+  .cursor-trail,
+  .trail-dot,
+  .orbiting-icons {
+    display: none !important;
+  }
+  
+  .animate-on-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  
+  .timeline-line {
+    transform: scaleY(1) !important;
+  }
+}
